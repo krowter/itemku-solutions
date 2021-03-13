@@ -7,11 +7,6 @@ const solution = (record) => {
   return history;
 };
 
-const ACTION = {
-  Enter: Symbol("Enter"),
-  Leave: Symbol("Leave"),
-};
-
 class Chat {
   constructor() {
     this.history = [];
@@ -51,12 +46,12 @@ class Chat {
   }
 
   _memberEnter({ userId, userName }) {
-    this.history.push(new UserAction(userId, ACTION.Enter));
+    this.history.push(new UserAction(userId, "Enter"));
     this.members[userId] = new User(userId, userName);
   }
 
   _memberLeave(userId) {
-    this.history.push(new UserAction(userId, ACTION.Leave));
+    this.history.push(new UserAction(userId, "Leave"));
   }
 
   _memberChangeName({ userId, newName }) {
@@ -94,9 +89,9 @@ class UserAction {
 
   getText() {
     switch (this.action) {
-      case ACTION.Enter:
+      case "Enter":
         return "came in";
-      case ACTION.Leave:
+      case "Leave":
         return "has left";
       default:
         break;
